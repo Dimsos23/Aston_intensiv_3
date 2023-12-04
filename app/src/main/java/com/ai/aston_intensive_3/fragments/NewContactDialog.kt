@@ -12,48 +12,46 @@ import com.ai.aston_intensive_3.R
 import com.ai.aston_intensive_3.adapter.ContactAdapter
 import com.ai.aston_intensive_3.model.Contact
 
-class EditContact(private val contact: Contact) : DialogFragment() {
+
+class NewContactDialog : DialogFragment() {
 
     private lateinit var adapter: ContactAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-            val layout = layoutInflater.inflate(R.layout.fragment_edit_contact, null)
+            val layout = layoutInflater.inflate(R.layout.fragment_new_contact, null)
 
-            val dataset = MainActivity.myDataset
+            val contactList = MainActivity.contactList
             val recyclerView = it.findViewById<RecyclerView>(R.id.recyclerview)
-            adapter = recyclerView.adapter as ContactAdapter
+            adapter = ContactAdapter(requireContext())
             recyclerView.adapter = adapter
 
 
-            val editButton: Button = layout.findViewById(R.id.editButton)
+            val addButton: Button = layout.findViewById(R.id.addButton)
             val cancelButton: Button = layout.findViewById(R.id.cancelButton)
             val editTextFirstName: EditText = layout.findViewById(R.id.editTextFirstName)
             val editTextLastName: EditText = layout.findViewById(R.id.editTextLastName)
             val editTextPhone: EditText = layout.findViewById(R.id.editTextPhone)
 
-            editTextFirstName.setText(contact.name)
-            editTextLastName.setText(contact.surname)
-            editTextPhone.setText(contact.phone)
 
-            editButton.setOnClickListener {
-                val newContact = Contact(contact.id,
-                    editTextFirstName.text.toString(),
-                    editTextLastName.text.toString(),
-                    editTextPhone.text.toString()
-                )
-                dataset.remove(contact)
-                dataset.add(contact.id, newContact)
-//                dataset[contact.id] = newContact
-                adapter.notifyItemRemoved(dataset.indexOf(contact))
-                adapter.notifyDataSetChanged()
+            addButton.setOnClickListener {
+                val id = contactList.size +1
+                val name = editTextFirstName.text.toString()
+                val surname = editTextLastName.text.toString()
+                val phone = editTextPhone.text.toString()
+
+                val newContact = Contact(id, name, surname, phone)
+
+                contactList.add(newContact)
+                adapter.updateData(contactList)
                 dialog?.cancel()
             }
 
             cancelButton.setOnClickListener {
                 dialog?.cancel()
             }
+
             builder.setView(layout)
                 .create()
         } ?: throw IllegalStateException("Activity cannot be null")
