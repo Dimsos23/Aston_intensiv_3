@@ -1,5 +1,6 @@
 package com.ai.aston_intensive_3
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val linearLayoutManager = LinearLayoutManager(this)
         val contactAdapter = ContactAdapter(this)
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
-        binding.recyclerview.apply {
+        binding.recyclerView.apply {
             adapter = contactAdapter
             layoutManager = linearLayoutManager
             contactAdapter.updateData(contactList)

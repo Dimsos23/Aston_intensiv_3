@@ -23,7 +23,7 @@ class NewContactDialog : DialogFragment() {
             val layout = layoutInflater.inflate(R.layout.fragment_new_contact, null)
 
             val contactList = MainActivity.contactList
-            val recyclerView = it.findViewById<RecyclerView>(R.id.recyclerview)
+            val recyclerView = it.findViewById<RecyclerView>(R.id.recycler_view)
             adapter = ContactAdapter(requireContext())
             recyclerView.adapter = adapter
 
@@ -49,6 +49,7 @@ class NewContactDialog : DialogFragment() {
             }
 
             cancelButton.setOnClickListener {
+                adapter.updateData(contactList)
                 dialog?.cancel()
             }
 

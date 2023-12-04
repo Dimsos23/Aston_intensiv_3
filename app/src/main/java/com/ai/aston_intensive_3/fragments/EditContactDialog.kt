@@ -22,7 +22,7 @@ class EditContactDialog(private val contact: Contact) : DialogFragment() {
             val layout = layoutInflater.inflate(R.layout.fragment_edit_contact, null)
 
             val contactList = MainActivity.contactList
-            val recyclerView = it.findViewById<RecyclerView>(R.id.recyclerview)
+            val recyclerView = it.findViewById<RecyclerView>(R.id.recycler_view)
             adapter = recyclerView.adapter as ContactAdapter
             recyclerView.adapter = adapter
 

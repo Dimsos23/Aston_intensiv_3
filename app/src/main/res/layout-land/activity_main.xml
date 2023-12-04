@@ -24,7 +24,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/recycler_view"
         android:layout_width="450dp"
         android:layout_height="230dp"
         android:layout_gravity="center"

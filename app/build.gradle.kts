@@ -49,4 +49,5 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation ("androidx.recyclerview:recyclerview-selection:1.1.0")
 }
